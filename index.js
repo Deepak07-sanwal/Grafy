@@ -52,6 +52,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // Append the container to the textBoxContainer
         textBoxContainer.appendChild(container);
+        // Apply scroll effect
+        textBoxContainer.scrollTop = textBoxContainer.scrollHeight;
 
         updateState();
     }

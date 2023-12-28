@@ -29,8 +29,6 @@ body {
 .text-property {
     width: 50%;
     height: 100%;
-    /* display: flex; */
-    /* align-items: center; */
     justify-content: space-between;
     padding: 5rem 10px;
     background: #d0cfcf;
