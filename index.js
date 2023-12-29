@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let zIndexCounter = 1;
     let stateStack = [];
     let currentStateIndex = -1;
+    let selectedTextBox = null;
 
     function addTextBox() {
         const container = document.createElement("div");
@@ -12,12 +13,18 @@ document.addEventListener("DOMContentLoaded", function () {
         container.style.alignItems = "center";
 
         const textBox = document.createElement("div");
-        textBox.className = "text-box";
         textBox.contentEditable = true;
         textBox.style.position = "absolute";
         textBox.style.left = "50px";
         textBox.style.top = "50px";
         textBox.style.zIndex = zIndexCounter++;
+        textBox.className = "text-box" + zIndexCounter;
+
+        // Add click event to select the text box
+        textBox.addEventListener("click", function () {
+            selectedTextBox = "text-box" + zIndexCounter;
+        });
+
 
         // Add event listeners for moving and editing the text box
         textBox.addEventListener("mousedown", startDrag);
@@ -33,6 +40,7 @@ document.addEventListener("DOMContentLoaded", function () {
         inputBox.style.margin = "0.5rem";
         inputBox.addEventListener("input", function () {
             textBox.innerText = this.value;
+            selectedTextBox = "text-box" + zIndexCounter;
         });
         // Create a close button for each input box
         const closeButton = document.createElement("button");
@@ -109,17 +117,19 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function applyTextProperties() {
+        // console.log("applyTextProperties" + selectedTextBox);
+        // console.log(typeof selectedTextBox);
         const form = document.getElementById("textPropertiesForm");
-        const selectedTextBox = document.querySelector(".text-box");
+        const s = document.querySelector(`.${selectedTextBox}`);
 
-        if (selectedTextBox) {
+        if (s) {
             const fontFamily = form.elements["fontFamily"].value;
             const fontSize = form.elements["fontSize"].value;
             const color = form.elements["color"].value;
 
-            selectedTextBox.style.fontFamily = fontFamily;
-            selectedTextBox.style.fontSize = fontSize + "px";
-            selectedTextBox.style.color = color;
+            s.style.fontFamily = fontFamily;
+            s.style.fontSize = fontSize + "px";
+            s.style.color = color;
         }
     }
 
