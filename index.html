@@ -20,10 +20,9 @@
 
             <div class="text-property d-flex flex-column" id="textBoxContainer" style=" overflow-y: auto;">
                 <div class="text-botton mt-3">
-                    <button type="button" class="btn-lg btn-primary" style="width: 100%;" onclick="addTextBox()">Make
-                        TextBox</button>
+                    <button type="button" class="btn-lg btn-primary" style="width: 100%;">MakeTextBox</button>
                 </div>
-                <div class="textPropertiesForm mb-3" id="textPropertiesForm">
+                <form class="mt-3" id="textPropertiesForm">
                     <div class="mb-3">
                         <label for="fontFamilyInput" class="form-label">Font Family</label>
                         <select class="form-select" id="fontFamilyInput" name="fontFamily">
@@ -42,11 +41,10 @@
                         <label for="colorInput" class="form-label">Color</label>
                         <input type="color" class="form-control" id="colorInput" name="color">
                     </div>
-                    <button type="button" class="btn-lg btn-primary" style="width: 100%;"
-                        onclick="applyTextProperties()">Apply Text Properties</button>
-                </div>
+                    <button type="button" class="btn-lg btn-primary" style="width: 100%;">Apply Text Properties</button>
+                </form>
 
-                <div class="d-flex undo-redo-button justify-content-around mb-3">
+                <div class="d-flex undo-redo-button justify-content-around mb-3 mt-3">
                     <button type="button" class="btn-lg btn-primary" id="undoButton">Undo</button>
                     <button type="button" class="btn-lg btn-primary" id="redoButton">Redo</button>
                 </div>
