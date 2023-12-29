@@ -19,12 +19,10 @@ document.addEventListener("DOMContentLoaded", function () {
         textBox.style.top = "50px";
         textBox.style.zIndex = zIndexCounter++;
         textBox.className = "text-box" + zIndexCounter;
-
-        // Add click event to select the text box
-        textBox.addEventListener("click", function () {
-            selectedTextBox = "text-box" + zIndexCounter;
-        });
-
+        textBox.onclick = () => {
+            // console.log("click" + textBox.className)
+            updateState(textBox.className);
+        };
 
         // Add event listeners for moving and editing the text box
         textBox.addEventListener("mousedown", startDrag);
@@ -40,8 +38,10 @@ document.addEventListener("DOMContentLoaded", function () {
         inputBox.style.margin = "0.5rem";
         inputBox.addEventListener("input", function () {
             textBox.innerText = this.value;
-            selectedTextBox = "text-box" + zIndexCounter;
         });
+        inputBox.onclick = () => {
+            updateState(textBox.className);
+        };
         // Create a close button for each input box
         const closeButton = document.createElement("button");
         closeButton.type = "button";
@@ -51,7 +51,6 @@ document.addEventListener("DOMContentLoaded", function () {
         closeButton.addEventListener("click", function () {
             textBox.remove();
             container.remove();
-            updateState();
         });
 
         // Append input box and close button to the container
@@ -63,13 +62,10 @@ document.addEventListener("DOMContentLoaded", function () {
         // Apply scroll effect
         textBoxContainer.scrollTop = textBoxContainer.scrollHeight;
 
-        updateState();
     }
-    function updateState() {
-        // Store the current state in the stack
-        stateStack = stateStack.slice(0, currentStateIndex + 1);
-        stateStack.push(editor.innerHTML);
-        currentStateIndex = stateStack.length - 1;
+    function updateState(s) {
+        // console.log("updateState" + s);
+        selectedTextBox = s;
     }
 
     function undo() {
